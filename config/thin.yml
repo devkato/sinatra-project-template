@@ -1,0 +1,12 @@
+--- 
+environment: development
+address: 0.0.0.0
+port: 3000
+timeout: 30
+log: log/thin.log
+pid: tmp/thin.pid
+max_conns: 256
+max_persistent_conns: 128
+require: []
+wait: 30
+daemonize: false
