@@ -1,14 +1,14 @@
 How to setup.
 
 [pre-requirements]
-ruby 1.9.2
-bundler 1.0.10
+ruby 2.0.0-p247
+bundler 1.4.0.rc.1
 
 1. run the command below.
-bundle install --path vendor/bundle --binstubs
+bundle install --binstubs
 
-2. run thin
-./bin/thin start -C config/thin.yml
+2. run foreman
+./bin/foreman start
 
 done!
 

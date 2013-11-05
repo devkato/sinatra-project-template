@@ -1,7 +1,30 @@
 # A sample Gemfile
 source "http://rubygems.org"
 
-gem 'sinatra',          '=1.1.3'
-gem 'sinatra-reloader', '=0.5.0'
-gem 'thin',             '=1.2.8'
+gem 'sinatra', require: 'sinatra/base'
+gem 'sinatra-contrib', require: 'sinatra/reloader'
+gem 'puma'
+gem 'haml'
+gem 'coffee-script'
+gem 'sass'
+gem 'sprockets'
+gem 'sprockets-helpers'
+gem 'rake'
+gem 'bundler'
+gem 'spork'
+gem 'rspec'
+
+group :development do
+  gem 'foreman'
+  gem 'guard'
+  gem 'guard-bundler'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'rb-fsevent', require: false
+  # gem 'terminal-notifier-guard'
+  # gem 'guard-livereload'
+  gem 'guard-sprockets2'
+  gem 'guard-shotgun'
+  gem 'guard-ego'
+end
 

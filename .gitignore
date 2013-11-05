@@ -1,2 +1,6 @@
 .bundle
-
+/bin
+.foreman
+/public/assets/*.js
+/public/assets/*.css
+/public/assets/*.gz

@@ -1,13 +1,20 @@
 # -*- coding: utf-8 -*-
+ 
+require 'bundler/setup'
 
 # gems dependened on
-require 'bundler/setup'
 Bundler.require(:default)
-require 'sinatra/base'
-require 'sinatra/reloader' if development?
-require 'erb'
+
+# use Rack::CommonLogger
+ 
+require './app'
+
+map AppTemplate.assets_prefix do
+  run AppTemplate.sprockets
+end
 
 # application libraries
-require './app'
-run AppTemplate
 
+map '/' do
+  run AppTemplate
+end
