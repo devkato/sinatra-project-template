@@ -66,6 +66,21 @@ class AppTemplate < Sinatra::Base
     haml :index
   end
 
+  # ----------------------------------------------------------------------
+  # expected format of parameters is:
+  #
+  # params = {
+  #   device: {
+  #     system_version: (string),
+  #     app_version:    (string),
+  #     uuid:           (string),
+  #     system_name:    (string),
+  #     model:          (string)
+  #   },
+  #
+  #   data: (json formatted string)
+  # }
+  # ----------------------------------------------------------------------
   post '/api/v1/beacon' do
 
     device = Yajl::Parser.new(symbolize_keys: true).parse(params['device'])
