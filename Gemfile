@@ -13,6 +13,8 @@ gem 'rake'
 gem 'bundler'
 gem 'spork'
 gem 'rspec'
+gem 'yajl-ruby', require: 'yajl'
+gem 'awesome_print'
 
 group :development do
   gem 'foreman'

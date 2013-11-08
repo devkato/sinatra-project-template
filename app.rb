@@ -1,7 +1,7 @@
 
 # disable foreman stdout buffering
-$stdout.sync = true
-$stderr.sync = true
+# $stdout.sync = true
+# $stderr.sync = true
 
 # ======================================================================
 #
@@ -10,9 +10,11 @@ $stderr.sync = true
 # ======================================================================
 class AppTemplate < Sinatra::Base
 
+  disable :logging
+
   # sinatra general configurations
   set :sessions,            false
-  set :logging,             true
+  set :logging,             false
   set :dump_errors,         true
   set :some_custom_option,  false
   set :public_dir,          './public'
@@ -62,6 +64,24 @@ class AppTemplate < Sinatra::Base
   # ----------------------------------------------------------------------
   get '/' do
     haml :index
+  end
+
+  post '/api/v1/beacon' do
+
+    device = Yajl::Parser.new(symbolize_keys: true).parse(params['device'])
+    device[:system_major_version] = device[:system_version].split(/\./)[0].to_s
+
+    data = Yajl::Parser.new(symbolize_keys: true).parse(params['data'])
+
+    ap "device --------------------------------------------------------------------------------"
+    ap device
+    ap "data --------------------------------------------------------------------------------"
+    ap data
+
+    content_type :json
+
+    status 200
+    { status:  'success', timestamp: Time.now.to_i }.to_json
   end
 end
 
