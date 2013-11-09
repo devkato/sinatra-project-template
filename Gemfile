@@ -3,7 +3,7 @@ source "http://rubygems.org"
 
 gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-contrib', require: 'sinatra/reloader'
-gem 'puma'
+# gem 'puma'
 gem 'haml'
 gem 'coffee-script'
 gem 'sass'

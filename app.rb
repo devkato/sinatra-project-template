@@ -88,10 +88,20 @@ class AppTemplate < Sinatra::Base
 
     data = Yajl::Parser.new(symbolize_keys: true).parse(params['data'])
 
-    ap "device --------------------------------------------------------------------------------"
-    ap device
-    ap "data --------------------------------------------------------------------------------"
-    ap data
+    # ap "device --------------------------------------------------------------------------------"
+    # ap device
+    # ap "data --------------------------------------------------------------------------------"
+    # ap data
+
+    now = Time.now
+
+    store_data = {
+      timestamp:  now.to_i,
+      device:     device,
+      data:       data,
+    }
+
+    ap store_data
 
     content_type :json
 
