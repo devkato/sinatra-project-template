@@ -32,11 +32,6 @@ class AppTemplate < Sinatra::Base
   # reload this class on development environment.
   configure(:development) do
     register Sinatra::Reloader
-    # set :logging, nil
-    # logger = Logger.new STDOUT
-    # logger.level = Logger::INFO
-    # logger.datetime_format = '%a %d-%m-%Y %H%M '
-    # set :logger, logger
   end
 
   configure do

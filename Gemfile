@@ -15,7 +15,8 @@ gem 'spork'
 gem 'rspec'
 gem 'yajl-ruby', require: 'yajl'
 gem 'awesome_print'
-
+# gem 'rack-ssl'
+ 
 group :development do
   gem 'foreman'
   gem 'guard'
