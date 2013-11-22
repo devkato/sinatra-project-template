@@ -4,5 +4,9 @@
 /public/assets/*.js
 /public/assets/*.css
 /public/assets/*.gz
+/public/assets/*.gif
+/public/assets/*.png
+/public/assets/*.jpg
+/public/assets/*.jpeg
 
 /mongodb.yml
