@@ -35,6 +35,7 @@ class AppTemplate < Sinatra::Base
   end
 
   configure do
+    # asset pipeline
     sprockets.append_path(File.join(root, 'assets', 'stylesheets'))
     sprockets.append_path(File.join(root, 'assets', 'javascripts'))
     sprockets.append_path(File.join(root, 'assets', 'images'))
@@ -47,6 +48,14 @@ class AppTemplate < Sinatra::Base
 
       config.debug = true
     end
+
+    # MongoDB
+    options = YAML.load_file('./mongodb.yml')[ENV['RACK_ENV']]
+    mongo_client = Mongo::MongoClient.new(options['host'], options['port'])
+    db = mongo_client.db(options['database'])
+    db.authenticate(options['username'], options['password'])
+
+    set :mongo, db
   end
 
   helpers do
@@ -59,6 +68,11 @@ class AppTemplate < Sinatra::Base
   # ----------------------------------------------------------------------
   get '/' do
     haml :index
+  end
+
+  get '/records' do
+    content_type :json
+    settings.mongo['raw'].find.to_a.to_json
   end
 
   # ----------------------------------------------------------------------
@@ -96,7 +110,7 @@ class AppTemplate < Sinatra::Base
       data:       data,
     }
 
-    ap store_data
+    settings.mongo['raw'].insert store_data
 
     content_type :json
 

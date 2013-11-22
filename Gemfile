@@ -16,11 +16,15 @@ gem 'rspec'
 gem 'yajl-ruby', require: 'yajl'
 gem 'awesome_print'
 # gem 'rack-ssl'
+
+# MongoDB
+gem 'mongo', require: 'mongo'
+gem 'bson_ext'
  
 group :development do
   gem 'foreman'
-  gem 'guard'
-  gem 'guard-bundler'
+  gem 'guard', '=2.2.3'
+  # gem 'guard-bundler'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'rb-fsevent', require: false

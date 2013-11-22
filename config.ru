@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
  
 require 'bundler/setup'
+require 'yaml'
  
 
 # gems dependened on

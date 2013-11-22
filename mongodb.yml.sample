@@ -1,0 +1,16 @@
+development: &mongo
+  host: 
+  port: 
+  database: 
+  username: 
+  password: 
+
+test:
+  <<: *mongo
+
+staging: &mongo
+  <<: *mongo
+
+production:
+  <<: *mongo
+
