@@ -90,7 +90,7 @@ class AppTemplate < Sinatra::Base
   #   data: (json formatted string)
   # }
   # ----------------------------------------------------------------------
-  post '/api/v1/beacon' do
+  post '/api/app/v1/beacon' do
 
     device = Yajl::Parser.new(symbolize_keys: true).parse(params['device'])
     device[:system_major_version] = device[:system_version].split(/\./)[0].to_s
@@ -116,6 +116,19 @@ class AppTemplate < Sinatra::Base
 
     status 200
     { status:  'success', timestamp: Time.now.to_i }.to_json
+  end
+
+  get '/api/web/v1/beacon' do
+    content_type 'image/gif'
+    puts '/api/web/v1/beacon called'
+
+    event_name = params['e']
+    data = Yajl::Parser.new(symbolize_keys: true).parse(params['d'])
+
+    puts "event_name -> #{event_name}"
+    ap data
+
+    Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
   end
 end
 

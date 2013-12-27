@@ -15,3 +15,27 @@
 
     %img{ src: image_path('blank.gif') }
 
+    :javascript
+      // tag
+      (function(_window, _document, _tag_name, _src, _obj_name, _element, _first_script_tag){
+        _window['AnalyticsObject'] = _obj_name;
+
+        _window[_obj_name]= _window[_obj_name] || function() {
+          (_window[_obj_name].q = _window[_obj_name].q || []).push(arguments)
+        },
+
+        _window[_obj_name].l = 1 * new Date();
+      
+        _element = _document.createElement(_tag_name),
+        _first_script_tag = _document.getElementsByTagName(_tag_name)[0];
+      
+        _element.async = 1;
+        _element.src = _src;
+        _first_script_tag.parentNode.insertBefore(_element, _first_script_tag)
+      })(window, document, 'script', '//localhost:9292/assets/beacon.js', 'beacon');
+      // tag
+      
+      // call anywhere/anytime
+      beacon('pageload');
+      beacon('test', { hello: 'world', age: 31});
+
