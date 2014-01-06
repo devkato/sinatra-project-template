@@ -53,7 +53,7 @@ class AppTemplate < Sinatra::Base
     options = YAML.load_file('./mongodb.yml')[ENV['RACK_ENV']]
     mongo_client = Mongo::MongoClient.new(options['host'], options['port'])
     db = mongo_client.db(options['database'])
-    db.authenticate(options['username'], options['password'])
+    # db.authenticate(options['username'], options['password'])
 
     set :mongo, db
   end
@@ -112,22 +112,35 @@ class AppTemplate < Sinatra::Base
 
     settings.mongo['raw'].insert store_data
 
+    # response json
     content_type :json
-
     status 200
     { status:  'success', timestamp: Time.now.to_i }.to_json
   end
 
   get '/api/web/v1/beacon' do
-    content_type 'image/gif'
     puts '/api/web/v1/beacon called'
 
     event_name = params['e']
     data = Yajl::Parser.new(symbolize_keys: true).parse(params['d'])
 
-    puts "event_name -> #{event_name}"
-    ap data
+    # puts "event_name -> #{event_name}"
+    # ap data
 
+    now = Time.now
+
+    store_data = {
+      timestamp:  now.to_i,
+      event_name: event_name,
+      # device:     device,
+      data:       data,
+    }
+
+    settings.mongo['raw'].insert store_data
+
+    # response blank gif
+    content_type 'image/gif'
+    status 200
     Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
   end
 end
